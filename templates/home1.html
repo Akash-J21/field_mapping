@@ -1,0 +1,672 @@
+<style>
+
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .custom-input {
+        font-size: 14px;
+        border-radius: 6px;
+        line-height: 1.5;
+        padding: 5px 10px;
+        transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+        border: 2px solid #dee1e2;
+        color: rgb(14, 14, 16);
+        background: #dee1e2;
+        display: block;
+        height: 36px;
+        }
+        .custom-input:hover {
+            border-color: #ccc;
+        }
+        .custom-input:focus{
+            border-color: #9147ff;
+            background: #fff;
+        }
+
+
+
+    .container {
+      width: 100%;
+      height: 100%;
+      background-color: #e0e0e0;
+      position: relative;
+    }
+
+    /* top */
+    .top {
+      left: 0;
+      top: 0;
+      right: 0;
+      height: 40px; /* Example fixed width */
+      background-color: #f1f1f1;
+      color: black;
+      padding: 20px;
+      border-radius: 10px; /* Rounds right-side corners */
+    }
+
+
+    /* left */
+    .left {
+      position: absolute;
+      left: 0;
+      top: 100px;
+      bottom: 2px;
+      width: 200px; /* Example fixed width */
+      background-color: #f1f1f1;
+      color: black;
+      padding: 10px;
+      border-radius: 0 10px 10px 0; /* Rounds right-side corners */
+    }
+
+        /* right */
+    .right {
+      position: absolute;
+      right: 0;
+      top: 100px;
+      bottom: 2px;
+      left: 250px;
+      background-color: #f1f1f1;
+      color: black;
+      padding: 10px;
+      border-radius: 10px
+    }
+
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+    display: flex;
+    gap: 10px; /* Add some space between the buttons */
+    align-items: center;
+    justify-content: center; /* Center the buttons within the form */
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+}
+        .containerforbutton {
+            display: flex;
+            position: absolute;
+            top: 100px;
+            left: 280px;
+            right: 20;
+            align-items: center;
+            gap: 20px;
+            margin: 0px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #fileList {
+            display: flex;
+            flex-direction: row;
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            align-items: center;
+            height: 45px;
+            width: 500px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            max-height: 20px;
+            padding:5px;
+            margin: 5px;
+            border-radius: 5px;
+            align-items: center;
+            color: white;
+            background-color: #6c757d;
+        }
+        .file-item button {
+            background: none;
+            font-size: 15px;
+            border:none;
+            color: red;
+            padding:10px;
+            text-align: center; /* Centers the text inside the button */
+            line-height: 10px;
+            cursor: pointer;
+            letter-spacing: -20px;
+        }
+        #uploadButton, #resetButton, #runButton {
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px;
+            border: none;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #uploadButton:hover {
+            background-color: #28a745;
+            transform: scale(1.1);
+        }
+        #resetButton:hover {
+            background-color: #ff4444;
+            transform: scale(1.1);
+        }
+        #runButton:hover {
+            background-color: #007bff;
+            transform: scale(1.1);
+        }
+        #fileInput {
+            display: none;
+        }
+
+        .columns_box {
+            display: none;
+            position: absolute;
+            top: 230px;
+            left: 300px;
+            height : 300px;
+            right: 20px;
+            align-items: center;
+            margin: 0px;
+            background-color: #e0e0e0;
+            padding: 40px;
+            border-radius: 10px;
+            overflow-y: auto;
+            max-width: 300px;
+            max-height: 300px;
+            font-size: larger;
+            font-stretch: normal;
+        }
+
+        .addjoins {
+            display: none;
+            position: absolute;
+            top: 120px;
+            left: 1050px;
+            height : 65px;
+            width: 110px;
+            align-items: center;
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 10px;
+
+        }
+
+
+        .addrow {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 230px;
+            left: 700px;
+            width: 460px;
+            gap: 20px;
+            margin: 0px;
+            align-items:normal;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            overflow-y: auto;
+            max-height: 340px;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: grey;
+            border-radius: 10px;
+            padding:5px;
+            gap:20px;
+
+        }
+
+        .drop-area {
+            width: 100px;
+            text-align: center;
+        }
+
+        #add-row {
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px;
+            border: none;
+            background-color: #6c757d;
+            color: white;
+            font-size: medium;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #add-row:hover {
+            background-color: #28a745;
+            transform: scale(1.1);
+        }
+
+
+         #loadButton {
+            cursor: not-allowed; /* Cursor indicates that it's disabled */
+            position:absolute;
+            display: flex;
+            font-size: 18px;
+            padding: 10px;
+            border: none;
+            background-color: #e0e0e0;
+            color: white;
+            border-radius: 50%;
+            top : 18px;
+            left: 70px;
+            width: 50px;
+            height: 50px;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.3s;
+            opacity: 0.5; /* Dim the button to indicate it's disabled */
+        }
+        #loadButton.enabled {
+            cursor: pointer;
+            opacity: 1;
+            background-color: #6c757d;
+        }
+        #loadButton.enabled:hover {
+            background-color: #007bff;
+            transform: scale(1.1);
+        }
+
+
+  </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Page Example</title>
+</head>
+<body>
+  <div class="container">
+      <div  style="font-family:verdana;color:blue;" class="top">
+          <div><input type="text" class="custom-input" placeholder="filename"></div>
+      </div>
+    <div class="left">Left-aligned content</div>
+      <div class="right"></div>
+      <div class="into_right">
+        <div class="containerforbutton">
+            <form id="uploadForm" action="/" method="POST" enctype="multipart/form-data">
+                <div id="fileList"></div>
+                <button type="button" id="uploadButton">+</button>
+                <button type="submit" id="runButton">></button>
+                <button type="reset" id="resetButton">↻</button>
+                <input type="file" id="fileInput" multiple accept=".xlsx,.csv" name="files[]">
+            </form>
+        </div>
+          <div class="columns_box" id="output"></div>
+            <div class="addjoins" id="controls">
+                <button id="add-row">Add</button>
+                <button id="loadButton" disabled>Load</button>
+                </div>
+            <div class="addrow" id="rows-container"></div>
+
+      </div>
+      </div>
+      <script>
+        const uploadButton = document.getElementById('uploadButton');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const resetButton = document.getElementById('resetButton');
+        const uploadForm = document.getElementById('uploadForm');
+        const runButton = document.getElementById('runButton');
+
+
+        resetButton.addEventListener('click', () => {
+            window.location.href = '/'; // Redirect to the home page
+        });
+
+        uploadButton.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', () => {
+            fileList.innerHTML = '';  // Clear existing file list
+            Array.from(fileInput.files).forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.classList.add('file-item');
+                fileItem.innerHTML = `<span>${file.name}</span><button>x</button>`;
+                fileList.appendChild(fileItem);
+
+                // Remove file from list when 'x' is clicked
+                fileItem.querySelector('button').addEventListener('click', () => {
+                    fileList.removeChild(fileItem);
+                    // Remove the file from the input.files
+                    const files = Array.from(fileInput.files);
+                    const index = files.indexOf(file);
+                    files.splice(index, 1);
+                    // Reassign the updated file list back to the input
+                    const dataTransfer = new DataTransfer();
+                    files.forEach(f => dataTransfer.items.add(f));
+                    fileInput.files = dataTransfer.files;
+                });
+            });
+        });
+
+
+
+        runButton.addEventListener('click', () => {
+            if (fileInput.files.length === 0) {
+                alert('Please select at least one file.');
+                return;  // Prevent form submission if no files are selected
+            }
+            // Create a FormData object to send the selected files
+
+
+    const formData = new FormData();
+    for (let i = 0; i < fileInput.files.length; i++) {
+        formData.append('files[]', fileInput.files[i]);
+    }
+
+    // Send the files to the /download endpoint
+    fetch('/download', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const runElement = document.querySelector('.columns_box');
+        runElement.style.display = 'flex';
+        const addlabelElement = document.querySelector('.addjoins');
+        addlabelElement.style.display = 'flex';
+        return response.json();  // Convert the response to JSON
+    })
+    .then(data => {
+        // Process and display the JSON data
+        displayJsonData(data['columns']);
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+
+
+        });
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevent the form from submitting and reloading the page
+    });
+
+function displayJsonData(data) {
+    const outputDiv = document.getElementById('output');
+
+    // Clear any previous content
+    outputDiv.innerHTML = '';
+
+    // Create a container for the checkboxes
+    const checkboxContainer = document.createElement('div');
+    checkboxContainer.style.display = 'flex';
+    checkboxContainer.style.flexDirection = 'column';
+    checkboxContainer.style.alignItems = 'flex-start';  // Align items to the left
+
+    // Create "Select All" checkbox
+    const selectAllDiv = document.createElement('div');
+    selectAllDiv.style.marginBottom = '10px';
+    const selectAllCheckbox = document.createElement('input');
+    selectAllCheckbox.type = 'checkbox';
+    selectAllCheckbox.id = 'select-all';
+    selectAllCheckbox.style.marginRight = '10px';
+    const selectAllLabel = document.createElement('label');
+    selectAllLabel.htmlFor = 'select-all';
+    selectAllLabel.textContent = 'Select All';
+
+    selectAllDiv.appendChild(selectAllCheckbox);
+    selectAllDiv.appendChild(selectAllLabel);
+    checkboxContainer.appendChild(selectAllDiv);
+
+    // Create a list for the JSON data with checkboxes
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            const li = document.createElement('div'); // Change from 'li' to 'div'
+            li.style.marginBottom = '5px';
+            li.setAttribute('draggable', 'true');  // Make the column draggable
+            li.style.cursor = 'move';  // Change cursor to indicate draggable
+
+            // Create checkbox for each item
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.name = 'jsonCheckbox';
+            checkbox.value = key;
+            checkbox.style.marginRight = '10px';
+
+            const label = document.createElement('label');
+            label.htmlFor = key;
+            label.textContent = `${data[key]}`;
+
+            li.appendChild(checkbox);
+            li.appendChild(label);
+            checkboxContainer.appendChild(li);
+
+            // Add drag-and-drop event listeners
+            li.addEventListener('dragstart', handleDragStart);
+            li.addEventListener('dragover', handleDragOver);
+            li.addEventListener('drop', handleDrop);
+        }
+    }
+    outputDiv.appendChild(checkboxContainer);
+
+    // Add event listener to "Select All" checkbox
+    selectAllCheckbox.addEventListener('change', (event) => {
+        const checkboxes = document.querySelectorAll('input[name="jsonCheckbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = event.target.checked;
+        });
+    });
+}
+
+// Drag-and-drop event handlers
+let draggedElement = null;
+
+function handleDragStart(event) {
+    draggedElement = event.target;
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('text/plain', event.target.textContent);
+}
+
+function handleDragOver(event) {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+}
+
+function handleDrop(event) {
+    event.preventDefault();
+    const dropArea = event.target.closest('.drop-area');
+    if (dropArea) {
+        const draggedContent = event.dataTransfer.getData('text/plain');
+        dropArea.textContent = draggedContent;
+    }
+}
+
+
+function checkDropAreas() {
+          const rows = document.querySelectorAll('.row');
+          let allFilled = true;
+
+          rows.forEach(row => {
+              const dropArea1 = row.querySelector('.drop-area:nth-child(1)');
+              const dropArea2 = row.querySelector('.drop-area:nth-child(3)');
+              if (!dropArea1.textContent.trim() || !dropArea2.textContent.trim()) {
+                  allFilled = false;
+              }
+          });
+
+          return allFilled;
+      }
+
+      function toggleLoadButton() {
+          const loadButton = document.getElementById('loadButton');
+          if (checkDropAreas()) {
+              loadButton.classList.add('enabled');
+              loadButton.removeAttribute('disabled');
+              loadButton.style.cursor = 'pointer';
+          } else {
+              loadButton.classList.remove('enabled');
+              loadButton.setAttribute('disabled', true);
+              loadButton.style.cursor = 'not-allowed';
+          }
+      }
+
+document.getElementById('add-row').addEventListener('click', addRow);
+
+function addRow() {
+    const container = document.getElementById('rows-container');
+
+    // Create a new row div
+    const rowDiv = document.createElement('div');
+    rowDiv.className = 'row';
+
+    // Create the first drop area
+    const dropArea1 = document.createElement('div');
+    dropArea1.className = 'drop-area';
+    dropArea1.textContent = 'Drop Area 1';
+    dropArea1.setAttribute('draggable', 'true');
+    dropArea1.style.border = '1px dashed #ccc';
+    dropArea1.style.padding = '5px';
+    dropArea1.style.marginRight = '10px';
+
+
+    // Create the dropdown list box
+    const dropdown = document.createElement('select');
+    const innerOption = document.createElement('option');
+    innerOption.value = 'inner';
+    innerOption.textContent = 'Inner';
+
+
+    const leftOption = document.createElement('option');
+    leftOption.value = 'left';
+    leftOption.textContent = 'Left';
+
+    dropdown.appendChild(innerOption);
+    dropdown.appendChild(leftOption);
+    dropdown.style.marginRight = '10px';
+    dropdown.style.height = '30px';
+    dropdown.style.fontSize = '20px';
+
+    // Create the second drop area
+    const dropArea2 = document.createElement('div');
+    dropArea2.className = 'drop-area';
+    dropArea2.textContent = 'Drop Area 2';
+    dropArea2.setAttribute('draggable', 'true');
+    dropArea2.style.border = '1px dashed #ccc';
+    dropArea2.style.padding = '5px';
+    dropArea2.style.marginRight = '10px';
+
+    // Create the remove button
+    const removeButton = document.createElement('button');
+    removeButton.textContent = '-';
+    removeButton.style.backgroundColor = '#f44336';
+    removeButton.style.color = '#fff';
+    removeButton.style.border = 'none';
+    removeButton.style.fontSize = 'x-large';
+    removeButton.style.borderRadius = '10px';
+    removeButton.style.padding = '0px 10px';
+    removeButton.style.cursor = 'pointer';
+
+    removeButton.addEventListener('click', () => {
+        container.removeChild(rowDiv);
+        toggleLoadButton();
+
+    });
+
+    // Append all elements to the row div
+    rowDiv.appendChild(dropArea1);
+    rowDiv.appendChild(dropdown);
+    rowDiv.appendChild(dropArea2);
+    rowDiv.appendChild(removeButton);
+
+    // Append the row to the container
+    container.appendChild(rowDiv);
+
+    // Set up drag-and-drop for the new drop areas
+    dropArea1.addEventListener('dragover', handleDragOver);
+    dropArea1.addEventListener('drop', handleDrop);
+    dropArea2.addEventListener('dragover', handleDragOver);
+    dropArea2.addEventListener('drop', handleDrop);
+
+     rowDiv.querySelector('.drop-area:nth-child(1)').addEventListener('drop', () => {
+              toggleLoadButton();
+          });
+          rowDiv.querySelector('.drop-area:nth-child(3)').addEventListener('drop', () => {
+              toggleLoadButton();
+          });
+
+          // Check if the Load button should be enabled
+          toggleLoadButton();
+
+}
+ document.getElementById('loadButton').addEventListener('click', () => {
+          // Ensure the Load button is enabled
+
+          if (!document.getElementById('loadButton').disabled) {
+              const selectedColumns = Array.from(document.querySelectorAll('input[name="jsonCheckbox"]:checked'))
+                  .map(checkbox => checkbox.value);
+              const rows = document.querySelectorAll('.row');
+              const joins = [];
+
+              rows.forEach(row => {
+                  const dropArea1 = row.querySelector('.drop-area:nth-child(1)').textContent.trim();
+                  const dropArea2 = row.querySelector('.drop-area:nth-child(3)').textContent.trim();
+                  const joinType = row.querySelector('select').value;
+                  joins.push({ dropArea1, dropArea2, joinType });
+              });
+
+              const payload = {
+                  selectedColumns,
+                  numberOfJoins: joins.length,
+                  joins
+              };
+
+              // Send data to backend
+              fetch('/process', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(payload)
+              })
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                  }
+                  return window.location.href = '/table';
+              })
+
+              .catch(error => {
+                  console.error('There was a problem with the fetch operation:', error);
+              });
+          }
+      });
+
+      // Initial check on page load
+      toggleLoadButton();
+
+
+
+
+    </script>
+
+
+</body>
+</html>
+
+
+
